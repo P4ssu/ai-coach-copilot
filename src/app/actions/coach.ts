@@ -267,6 +267,7 @@ export async function resendClientInvite(
 
     if (!emailResult.success) {
       console.error('Failed to resend invite email:', emailResult.error)
+      return { success: false, error: `Email failed: ${emailResult.error}` }
     }
 
     return { success: true }
