@@ -24,7 +24,7 @@ export default function Home() {
             </h2>
 
             <p className="text-xl text-zinc-400 leading-relaxed">
-              Athletes submit their check-in. You receive comprehensive feedback on progress, recovery, and nutrition — ready to review and act on.
+              Athletes submit their check-in. You receive comprehensive feedback on progress, recovery, and nutrition. Ready to review and act on.
             </p>
           </div>
 
