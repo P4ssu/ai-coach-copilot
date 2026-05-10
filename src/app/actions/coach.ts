@@ -222,40 +222,51 @@ export async function resendClientInvite(
 
   try {
     // Verify ownership and get invite
-    const { data: invite } = await supabase
+    const { data: invite, error: inviteError } = await supabase
       .from('client_invites')
       .select('*')
       .eq('id', inviteId)
       .eq('coach_id', user.id)
       .single()
 
-    if (!invite) {
-      return { success: false, error: 'Invite not found' }
+    if (inviteError || !invite) {
+      console.error('Invite query error:', inviteError)
+      return { success: false, error: inviteError?.message || 'Invite not found' }
     }
+
+    console.log('[Resend] Found invite:', { inviteId, email: invite.email, token: invite.token })
 
     // Update expiry
     const expiresAt = new Date()
     expiresAt.setDate(expiresAt.getDate() + 7)
 
-    const { error } = await supabase
+    const { error: updateError } = await supabase
       .from('client_invites')
       .update({
         expires_at: expiresAt.toISOString(),
       })
       .eq('id', inviteId)
 
-    if (error) {
-      return { success: false, error: error.message }
+    if (updateError) {
+      console.error('Update expiry error:', updateError)
+      return { success: false, error: updateError.message }
     }
 
+    console.log('[Resend] Updated expiry for invite:', inviteId)
+
     // Get coach info for email
-    const { data: coachProfile } = await supabase
+    const { data: coachProfile, error: coachError } = await supabase
       .from('coaches')
       .select('name')
       .eq('id', user.id)
       .single()
 
+    if (coachError) {
+      console.error('Coach profile error:', coachError)
+    }
+
     const coachName = coachProfile?.name || user.email?.split('@')[0]
+    console.log('[Resend] Coach name:', coachName)
 
     // Send invite email
     const emailResult = await sendClientInviteEmail(
