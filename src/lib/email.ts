@@ -49,21 +49,21 @@ export async function sendClientInviteEmail(
     `
 
     console.log('[Resend] Sending invite email to:', toEmail, 'from:', FROM_EMAIL)
-    const response = await resend.emails.send({
+    const { data, error } = await resend.emails.send({
       from: FROM_EMAIL,
       to: toEmail,
       subject: `${coachName ? coachName + ' invited you to' : 'You\'re invited to'} Vexlon`,
       html: emailHtml,
     })
 
-    console.log('[Resend] Response:', response)
+    console.log('[Resend] Response - data:', data, 'error:', error)
 
-    if (response.error) {
-      console.error('[Resend] Email send error:', response.error)
-      return { success: false, error: typeof response.error === 'string' ? response.error : JSON.stringify(response.error) }
+    if (error) {
+      console.error('[Resend] Email send error:', error)
+      return { success: false, error: typeof error === 'string' ? error : JSON.stringify(error) }
     }
 
-    console.log('[Resend] Email sent successfully with id:', response.data?.id)
+    console.log('[Resend] Email sent successfully with id:', data?.id)
     return { success: true }
   } catch (err) {
     console.error('Email service error:', err)
@@ -111,21 +111,21 @@ export async function sendCoachSignupEmail(
     `
 
     console.log('[Resend] Sending coach signup email to:', toEmail)
-    const response = await resend.emails.send({
+    const { data, error } = await resend.emails.send({
       from: FROM_EMAIL,
       to: toEmail,
       subject: 'Welcome to Vexlon - Your Coaching Dashboard Awaits',
       html: emailHtml,
     })
 
-    console.log('[Resend] Response:', response)
+    console.log('[Resend] Response - data:', data, 'error:', error)
 
-    if (response.error) {
-      console.error('[Resend] Email send error:', response.error)
-      return { success: false, error: typeof response.error === 'string' ? response.error : JSON.stringify(response.error) }
+    if (error) {
+      console.error('[Resend] Email send error:', error)
+      return { success: false, error: typeof error === 'string' ? error : JSON.stringify(error) }
     }
 
-    console.log('[Resend] Email sent successfully with id:', response.data?.id)
+    console.log('[Resend] Email sent successfully with id:', data?.id)
     return { success: true }
   } catch (err) {
     console.error('Email service error:', err)
@@ -182,21 +182,21 @@ export async function sendEmailVerificationEmail(
     `
 
     console.log('[Resend] Sending email verification to:', toEmail)
-    const response = await resend.emails.send({
+    const { data, error } = await resend.emails.send({
       from: FROM_EMAIL,
       to: toEmail,
       subject: 'Verify Your Email Change on Vexlon',
       html: emailHtml,
     })
 
-    console.log('[Resend] Response:', response)
+    console.log('[Resend] Response - data:', data, 'error:', error)
 
-    if (response.error) {
-      console.error('[Resend] Email send error:', response.error)
-      return { success: false, error: typeof response.error === 'string' ? response.error : JSON.stringify(response.error) }
+    if (error) {
+      console.error('[Resend] Email send error:', error)
+      return { success: false, error: typeof error === 'string' ? error : JSON.stringify(error) }
     }
 
-    console.log('[Resend] Email sent successfully with id:', response.data?.id)
+    console.log('[Resend] Email sent successfully with id:', data?.id)
     return { success: true }
   } catch (err) {
     console.error('Email service error:', err)
