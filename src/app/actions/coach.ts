@@ -248,8 +248,26 @@ export async function resendClientInvite(
       return { success: false, error: error.message }
     }
 
-    // TODO: Send email again
-    // sendInviteEmail(invite.email, invite.token)
+    // Get coach info for email
+    const { data: coachProfile } = await supabase
+      .from('coaches')
+      .select('name')
+      .eq('id', user.id)
+      .single()
+
+    const coachName = coachProfile?.name || user.email?.split('@')[0]
+
+    // Send invite email
+    const emailResult = await sendClientInviteEmail(
+      invite.email,
+      invite.client_name || undefined,
+      coachName,
+      invite.token
+    )
+
+    if (!emailResult.success) {
+      console.error('Failed to resend invite email:', emailResult.error)
+    }
 
     return { success: true }
   } catch (err) {
