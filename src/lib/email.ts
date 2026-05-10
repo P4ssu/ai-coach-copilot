@@ -2,7 +2,7 @@ import { Resend } from 'resend'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-const FROM_EMAIL = 'onboarding@resend.dev' // Change this to your verified domain
+const FROM_EMAIL = 'support@vexlon.dev' // Change this to your verified domain
 
 /**
  * Send client invite email with registration link
