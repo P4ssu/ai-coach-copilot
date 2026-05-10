@@ -1,7 +1,10 @@
+import { Suspense } from 'react'
 import { RegisterClient } from './RegisterClient'
 
-export const dynamic = 'force-dynamic'
-
 export default function RegisterPage() {
-  return <RegisterClient />
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-black text-white flex items-center justify-center"><p className="text-zinc-400">Loading...</p></div>}>
+      <RegisterClient />
+    </Suspense>
+  )
 }
