@@ -1,10 +1,10 @@
-import { Suspense } from 'react'
 import { RegisterClient } from './RegisterClient'
 
-export default function RegisterPage() {
-  return (
-    <Suspense fallback={<div className="min-h-screen bg-black text-white flex items-center justify-center"><p className="text-zinc-400">Loading...</p></div>}>
-      <RegisterClient />
-    </Suspense>
-  )
+interface PageProps {
+  searchParams: Promise<{ token?: string; email?: string }>
+}
+
+export default async function RegisterPage({ searchParams }: PageProps) {
+  const params = await searchParams
+  return <RegisterClient token={params.token ?? null} email={params.email ?? null} />
 }

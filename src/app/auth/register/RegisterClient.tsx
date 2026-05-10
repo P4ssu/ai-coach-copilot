@@ -5,11 +5,14 @@ import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { validateAndAcceptInvite, acceptInviteAndCreateClient } from '@/app/actions/coach'
 import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
 
-export function RegisterClient() {
+interface RegisterClientProps {
+  token: string | null
+  email: string | null
+}
+
+export function RegisterClient({ token, email: emailParam }: RegisterClientProps) {
   const router = useRouter()
-  const searchParams = useSearchParams()
   const [loading, setLoading] = useState(true)
   const [registering, setRegistering] = useState(false)
   const [error, setError] = useState('')
@@ -30,26 +33,20 @@ export function RegisterClient() {
   // Validate invite on mount
   useEffect(() => {
     async function validateInvite() {
-      const token = searchParams.get('token')
-      const email = searchParams.get('email')
-
-      if (!token || !email) {
+      if (!token || !emailParam) {
         setError('Invalid invite link. Please check your email.')
         setLoading(false)
         return
       }
 
       try {
-        const result = await validateAndAcceptInvite(token, email)
+        const result = await validateAndAcceptInvite(token, emailParam)
 
         if (result.success && result.coachId) {
           setInviteToken(token)
-          setInviteEmail(email)
-          setFormData({ ...formData, email: email })
+          setInviteEmail(emailParam)
+          setFormData({ ...formData, email: emailParam })
           setInviteValid(true)
-
-          // Optionally fetch coach name from coachId
-          // For now just mark as valid
         } else {
           setError(result.error || 'Invalid invite link.')
         }
@@ -61,7 +58,7 @@ export function RegisterClient() {
     }
 
     validateInvite()
-  }, [searchParams])
+  }, [token, emailParam])
 
   async function handleRegister(e: React.FormEvent) {
     e.preventDefault()

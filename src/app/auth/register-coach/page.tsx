@@ -1,10 +1,10 @@
-import { Suspense } from 'react'
 import { RegisterCoachClient } from './RegisterCoachClient'
 
-export default function RegisterCoachPage() {
-  return (
-    <Suspense fallback={<div className="min-h-screen bg-black text-white flex items-center justify-center"><p className="text-zinc-400">Loading...</p></div>}>
-      <RegisterCoachClient />
-    </Suspense>
-  )
+interface PageProps {
+  searchParams: Promise<{ token?: string; email?: string }>
+}
+
+export default async function RegisterCoachPage({ searchParams }: PageProps) {
+  const params = await searchParams
+  return <RegisterCoachClient token={params.token ?? null} email={params.email ?? null} />
 }

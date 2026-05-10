@@ -2,11 +2,15 @@
 
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { useSearchParams, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { Header } from '@/components/Header'
 import { createClient } from '@/lib/supabase/client'
 import { deleteCheckInFromDB } from '@/app/actions/checkin'
 import { CheckInRecord, EditCheckInData } from '@/types/checkin'
+
+interface DashboardClientProps {
+  submitted: boolean
+}
 
 const sliderStyles = `
   input[type="range"] {
@@ -66,10 +70,9 @@ const sliderStyles = `
   }
 `
 
-export function DashboardClient() {
-  const searchParams = useSearchParams()
+export function DashboardClient({ submitted }: DashboardClientProps) {
   const router = useRouter()
-  const [showSuccess, setShowSuccess] = useState(!!searchParams.get('submitted'))
+  const [showSuccess, setShowSuccess] = useState(submitted)
   const [latestStats, setLatestStats] = useState<CheckInRecord | null>(null)
   const [latestApprovedCheckin, setLatestApprovedCheckin] = useState<CheckInRecord | null>(null)
   const [allCheckins, setAllCheckins] = useState<CheckInRecord[]>([])

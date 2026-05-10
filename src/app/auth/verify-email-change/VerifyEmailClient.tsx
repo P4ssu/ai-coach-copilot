@@ -1,13 +1,16 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { verifyClientEmailChange } from '@/app/actions/coach'
 import Link from 'next/link'
 
-export function VerifyEmailClient() {
+interface VerifyEmailClientProps {
+  token: string | null
+}
+
+export function VerifyEmailClient({ token }: VerifyEmailClientProps) {
   const router = useRouter()
-  const searchParams = useSearchParams()
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
@@ -15,8 +18,6 @@ export function VerifyEmailClient() {
 
   useEffect(() => {
     async function verifyEmail() {
-      const token = searchParams.get('token')
-
       if (!token) {
         setError('Invalid verification link')
         setLoading(false)
@@ -45,7 +46,7 @@ export function VerifyEmailClient() {
     }
 
     verifyEmail()
-  }, [searchParams, router])
+  }, [token, router])
 
   // Loading state
   if (loading) {
