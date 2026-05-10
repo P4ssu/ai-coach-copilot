@@ -15,95 +15,54 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-6 py-20 sm:py-32">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="max-w-3xl mx-auto text-center space-y-12">
 
-          {/* Left: For Coaches */}
-          <div className="space-y-8">
-            <div>
-              <p className="text-emerald-400 text-sm font-semibold uppercase tracking-widest mb-3">
-                For Coaches
-              </p>
-              <h2 className="text-4xl sm:text-5xl font-bold leading-tight">
-                Structured feedback in minutes, not hours.
-              </h2>
-            </div>
+          {/* Headline */}
+          <div className="space-y-6">
+            <h2 className="text-5xl sm:text-6xl font-bold leading-tight">
+              Structured feedback in minutes, not hours.
+            </h2>
 
-            <p className="text-lg text-zinc-400 leading-relaxed max-w-md">
+            <p className="text-xl text-zinc-400 leading-relaxed">
               Athletes submit their check-in. You receive comprehensive feedback on progress, recovery, and nutrition — ready to review and act on.
             </p>
-
-            <div className="space-y-3 pt-4">
-              <div className="flex gap-3">
-                <div className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <div className="w-2 h-2 rounded-full bg-emerald-400"></div>
-                </div>
-                <span className="text-zinc-300">Review 10+ athletes daily in under an hour</span>
-              </div>
-              <div className="flex gap-3">
-                <div className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <div className="w-2 h-2 rounded-full bg-emerald-400"></div>
-                </div>
-                <span className="text-zinc-300">Consistent feedback framework every time</span>
-              </div>
-              <div className="flex gap-3">
-                <div className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <div className="w-2 h-2 rounded-full bg-emerald-400"></div>
-                </div>
-                <span className="text-zinc-300">Never miss critical details from your athletes</span>
-              </div>
-            </div>
-
-            <a
-              href="/dashboard"
-              className="inline-block bg-emerald-500 hover:bg-emerald-400 text-black font-semibold px-8 py-3 rounded-lg transition-colors mt-6"
-            >
-              Get Started as Coach
-            </a>
           </div>
 
-          {/* Right: For Athletes */}
-          <div className="space-y-8 border-l border-zinc-800 pl-12">
-            <div>
-              <p className="text-emerald-400 text-sm font-semibold uppercase tracking-widest mb-3">
-                For Athletes
-              </p>
-              <h2 className="text-4xl sm:text-5xl font-bold leading-tight">
-                Get detailed coaching feedback you can act on.
-              </h2>
+          {/* Benefits */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div className="space-y-2">
+              <div className="flex justify-center mb-3">
+                <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+                  <div className="w-3 h-3 rounded-full bg-emerald-400"></div>
+                </div>
+              </div>
+              <p className="text-zinc-300 font-medium">Review 10+ athletes daily in under an hour</p>
             </div>
-
-            <p className="text-lg text-zinc-400 leading-relaxed max-w-md">
-              Share your weekly check-in and receive personalized coaching feedback covering all aspects of your training and recovery.
-            </p>
-
-            <div className="space-y-3 pt-4">
-              <div className="flex gap-3">
-                <div className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <div className="w-2 h-2 rounded-full bg-emerald-400"></div>
+            <div className="space-y-2">
+              <div className="flex justify-center mb-3">
+                <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+                  <div className="w-3 h-3 rounded-full bg-emerald-400"></div>
                 </div>
-                <span className="text-zinc-300">Structured feedback every week</span>
               </div>
-              <div className="flex gap-3">
-                <div className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <div className="w-2 h-2 rounded-full bg-emerald-400"></div>
-                </div>
-                <span className="text-zinc-300">Track your progress over time</span>
-              </div>
-              <div className="flex gap-3">
-                <div className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <div className="w-2 h-2 rounded-full bg-emerald-400"></div>
-                </div>
-                <span className="text-zinc-300">Direct feedback from your coach</span>
-              </div>
+              <p className="text-zinc-300 font-medium">Consistent feedback framework every time</p>
             </div>
-
-            <a
-              href="/auth/register"
-              className="inline-block bg-emerald-500 hover:bg-emerald-400 text-black font-semibold px-8 py-3 rounded-lg transition-colors mt-6"
-            >
-              Join as Athlete
-            </a>
+            <div className="space-y-2">
+              <div className="flex justify-center mb-3">
+                <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+                  <div className="w-3 h-3 rounded-full bg-emerald-400"></div>
+                </div>
+              </div>
+              <p className="text-zinc-300 font-medium">Never miss critical details from your athletes</p>
+            </div>
           </div>
+
+          {/* CTA */}
+          <a
+            href="/dashboard"
+            className="inline-block bg-emerald-500 hover:bg-emerald-400 text-black font-semibold px-8 py-4 rounded-lg transition-colors text-lg"
+          >
+            Start Coaching
+          </a>
         </div>
       </section>
 
