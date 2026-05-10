@@ -6,7 +6,6 @@ import { Header } from '@/components/Header'
 import {
   getCoachClientsWithInvites,
   createClientAndSendInvite,
-  resendClientInvite,
   deleteClientInvite,
   deleteClient,
 } from '@/app/actions/coach'
@@ -78,20 +77,6 @@ export default function CoachClientsPage() {
     }
 
     setSubmitting(false)
-  }
-
-  async function handleResendInvite(inviteId: string) {
-    try {
-      const result = await resendClientInvite(inviteId)
-      if (result.success) {
-        setSuccess('Invite resent!')
-        setTimeout(() => setSuccess(''), 3000)
-      } else {
-        setError(result.error || 'Failed to resend invite')
-      }
-    } catch (err) {
-      setError('An error occurred')
-    }
   }
 
   async function handleDeleteInvite() {
@@ -320,12 +305,6 @@ export default function CoachClientsPage() {
                         <span className="text-xs px-2 py-1 bg-purple-500/20 text-purple-400 rounded">
                           Pending
                         </span>
-                        <button
-                          onClick={() => handleResendInvite(invite.id)}
-                          className="text-xs px-3 py-1 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 rounded transition-colors"
-                        >
-                          Resend
-                        </button>
                         <button
                           onClick={() => {
                             setDeleteConfirmId(invite.id)
